@@ -27,42 +27,10 @@ Modules are generated with this tool: https://github.com/kabisa/datadog-terrafor
 
 ```terraform
 # tflint-ignore: terraform_module_version
-module "aws_eu_west_1" {
-  source = "kabisa/aws-services/datadog"
-
-  for_each = toset([
-    "cloudformation",
-    "cloudtrail",
-    "cloudwatch",
-    "directconnect",
-    "ec2",
-    "ecr",
-    "ecs",
-    "eks",
-    "elasticache",
-    "elasticsearch",
-    "elb",
-    "kms",
-    "lambda",
-    "rds",
-    "route53",
-    "s3",
-    "ses",
-    "sns",
-    "sqs",
-    "vpc",
-  ])
+module "my_deployment" {
+  source               = "kabisa/kubernetes-deployment/datadog"
   env                  = "prd"
   notification_channel = "mail@example.com"
-
-  include_tags = [
-    "region:eu-west-1",
-    "service:${each.key}"
-  ]
-  by_tags = [
-    "service"
-  ]
-  name_suffix = each.key
 }
 
 ```
@@ -78,7 +46,7 @@ Monitors:
 
 Steps:
    - Install [pre-commit](http://pre-commit.com/). E.g. `brew install pre-commit`.
-   - Run `pre-commit install` in this repo. (Every time you cloud a repo with pre-commit enabled you will need to run the pre-commit install command)
+   - Run `pre-commit install` in this repo. (Every time you clone a repo with pre-commit enabled you will need to run the pre-commit install command)
    - That’s it! Now every time you commit a code change (`.tf` file), the hooks in the `hooks:` config `.pre-commit-config.yaml` will execute.
 
 ## Deploy Desired Vs Status
