@@ -26,7 +26,6 @@ Modules are generated with this tool: https://github.com/kabisa/datadog-terrafor
 # Example Usage
 
 ```terraform
-# tflint-ignore: terraform_module_version
 module "my_deployment" {
   source               = "kabisa/kubernetes-deployment/datadog"
   env                  = "prd"
